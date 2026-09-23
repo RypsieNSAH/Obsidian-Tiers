@@ -422,10 +422,10 @@ main {
 
 .leader-row {
     display: grid;
-    grid-template-columns: 70px 1fr 160px 130px;
-    align-items: center;
-    gap: 15px;
-    padding: 14px 18px;
+    grid-template-columns: 55px 1fr 140px 125px;
+    align-items: start;
+    gap: 14px;
+    padding: 14px 16px;
     border: 1px solid var(--border);
     border-radius: 16px;
     background: var(--panel);
@@ -439,9 +439,12 @@ main {
     background: var(--panel2);
 }
 
+/* Platz */
+
 .place {
     font-size: 20px;
     font-weight: 1000;
+    padding-top: 12px;
 }
 
 .place.first {
@@ -456,38 +459,81 @@ main {
     color: #d99563;
 }
 
+/* Spieler */
+
 .player-info {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+}
+
+.player-avatar-box {
+    width: 58px;
+    min-width: 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
 }
 
 .player-info img {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     image-rendering: pixelated;
     border-radius: 9px;
+    border: 1px solid #39475b;
+    background: #17202d;
+}
+
+.player-overall-rank {
+    width: 58px;
+    padding: 3px 4px;
+    border-radius: 5px;
+    font-size: 7px;
+    line-height: 1;
+    text-align: center;
+    font-weight: 1000;
+    white-space: nowrap;
+}
+
+.player-text {
+    min-width: 0;
 }
 
 .player-info strong {
     display: block;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player-info small {
+    display: block;
     color: var(--muted);
+    margin-top: 4px;
 }
+
+/* Punkte */
 
 .points {
     text-align: right;
     font-weight: 900;
+    padding-top: 13px;
+    white-space: nowrap;
 }
 
+/* Rang rechts */
+
 .rank-pill {
-    padding: 7px 11px;
+    padding: 7px 9px;
     text-align: center;
     border-radius: 9px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 1000;
+    margin-top: 7px;
+    white-space: nowrap;
 }
 
 /* Overall rank colors */
@@ -507,9 +553,119 @@ main {
 .rank-ascendant { background:#39bd91; }
 .rank-overlord { background:#31a7c9; }
 .rank-legend { background:#f0b842; color:#15100a; }
+
 .rank-apex {
     background: linear-gradient(135deg,#ffcf55,#ff6b6b,#a56bff);
     color:#fff;
+}
+
+/* =========================
+   COMPACT MODE RANKINGS
+========================= */
+
+.leader-modes {
+    grid-column: 2 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(170px, .8fr) minmax(130px, .65fr);
+    gap: 8px;
+    margin-top: 1px;
+}
+
+.leader-mode-group {
+    min-width: 0;
+    padding: 7px;
+    border-radius: 10px;
+    background: #0c131d;
+    border: 1px solid #253144;
+}
+
+.leader-mode-group.pvp {
+    border-color: rgba(255,91,91,.24);
+}
+
+.leader-mode-group.skill {
+    border-color: rgba(112,103,255,.24);
+}
+
+.leader-mode-group.game {
+    border-color: rgba(32,201,151,.24);
+}
+
+.leader-mode-group-title {
+    font-size: 8px;
+    font-weight: 1000;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    margin: 0 0 5px 2px;
+}
+
+.leader-mode-group.pvp .leader-mode-group-title {
+    color: #ff7777;
+}
+
+.leader-mode-group.skill .leader-mode-group-title {
+    color: #968fff;
+}
+
+.leader-mode-group.game .leader-mode-group-title {
+    color: #4fe0c0;
+}
+
+.leader-mode-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 4px;
+}
+
+.leader-mode {
+    min-width: 0;
+    height: 26px;
+    padding: 3px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 6px;
+    background: #151e2b;
+    border: 1px solid #2b394c;
+    transition: .15s;
+}
+
+.leader-mode:hover {
+    transform: translateY(-1px);
+    background: #1b2636;
+}
+
+.leader-mode.pvp {
+    border-color: rgba(255,91,91,.22);
+}
+
+.leader-mode.skill {
+    border-color: rgba(112,103,255,.22);
+}
+
+.leader-mode.game {
+    border-color: rgba(32,201,151,.22);
+}
+
+.leader-mode-icon {
+    font-size: 10px;
+    line-height: 1;
+}
+
+.leader-mode-tier {
+    font-size: 7px;
+    line-height: 1;
+    font-weight: 1000;
+    color: #dbe4ef;
+}
+
+.leader-mode-tier.unranked-tier {
+    color: #647286;
+}
+
+.leader-mode.unranked-mode {
+    opacity: .55;
 }
 
 /* =========================
@@ -815,6 +971,7 @@ button {
 ========================= */
 
 @media (max-width: 1050px) {
+
     .modes {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -826,9 +983,19 @@ button {
     .profile-grid {
         grid-template-columns: 1fr;
     }
+
+    .leader-modes {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .leader-mode-group.pvp {
+        grid-column: 1 / -1;
+    }
+
 }
 
 @media (max-width: 760px) {
+
     .header-inner {
         flex-direction: column;
         align-items: stretch;
@@ -847,21 +1014,34 @@ button {
     }
 
     .leader-row {
-        grid-template-columns: 45px 1fr;
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
     }
 
     .leader-row .points,
     .leader-row .rank-pill {
         grid-column: 2;
         text-align: left;
+        margin-top: 0;
+    }
+
+    .leader-modes {
+        grid-column: 2;
+        grid-template-columns: 1fr;
+    }
+
+    .leader-mode-group.pvp {
+        grid-column: auto;
     }
 
     .admin-form {
         grid-template-columns: 1fr;
     }
+
 }
 
 @media (max-width: 500px) {
+
     main {
         width: min(100% - 18px, 1450px);
     }
@@ -890,6 +1070,34 @@ button {
         padding-left: 16px;
         padding-right: 16px;
     }
+
+    .player-info {
+        gap: 8px;
+    }
+
+    .player-avatar-box {
+        width: 48px;
+        min-width: 48px;
+    }
+
+    .player-info img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .player-overall-rank {
+        width: 48px;
+        font-size: 6px;
+    }
+
+    .player-info strong {
+        font-size: 13px;
+    }
+
+    .leader-mode-list {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
 }
 </style>
 </head>
@@ -901,6 +1109,7 @@ button {
 
         <div class="logo">
             <div class="logo-icon">⚔️</div>
+
             <div>
                 <h1>Minecraft Tierlist</h1>
                 <span>Competitive Minecraft Rankings</span>
@@ -908,21 +1117,35 @@ button {
         </div>
 
         <nav>
-            <button class="nav-btn nav-pvp active" onclick="changeCategory('pvp')">
+
+            <button
+                class="nav-btn nav-pvp active"
+                onclick="changeCategory('pvp')"
+            >
                 ⚔ PvP
             </button>
 
-            <button class="nav-btn nav-skill" onclick="changeCategory('skill')">
+            <button
+                class="nav-btn nav-skill"
+                onclick="changeCategory('skill')"
+            >
                 🧠 Skill
             </button>
 
-            <button class="nav-btn nav-game" onclick="changeCategory('game')">
+            <button
+                class="nav-btn nav-game"
+                onclick="changeCategory('game')"
+            >
                 🎮 Game
             </button>
 
-            <button class="nav-btn nav-overall" onclick="showOverall()">
+            <button
+                class="nav-btn nav-overall"
+                onclick="showOverall()"
+            >
                 🏆 Overall
             </button>
+
         </nav>
 
     </div>
@@ -931,36 +1154,55 @@ button {
 <main>
 
     <section class="hero">
+
         <h2>Competitive Minecraft Rankings</h2>
+
         <p>
             Vergleiche Spieler, Modi und Gesamtleistungen über alle 16 Kategorien.
         </p>
+
     </section>
 
     <section class="stats">
 
         <div class="stat">
+
             <div class="stat-icon">👥</div>
+
             <strong id="statPlayers">0</strong>
+
             <small>Spieler</small>
+
         </div>
 
         <div class="stat">
+
             <div class="stat-icon">🎯</div>
+
             <strong>16</strong>
+
             <small>Spielmodi</small>
+
         </div>
 
         <div class="stat">
+
             <div class="stat-icon">💎</div>
+
             <strong>960</strong>
+
             <small>Max. Punkte</small>
+
         </div>
 
         <div class="stat">
+
             <div class="stat-icon">🏆</div>
+
             <strong id="statRanked">0</strong>
+
             <small>Bewertungen</small>
+
         </div>
 
     </section>
@@ -968,8 +1210,15 @@ button {
     <div id="normalContent">
 
         <div class="section-title">
-            <h2 id="categoryHeading">⚔ PvP-Based</h2>
-            <span>Wähle einen Modus</span>
+
+            <h2 id="categoryHeading">
+                ⚔ PvP-Based
+            </h2>
+
+            <span>
+                Wähle einen Modus
+            </span>
+
         </div>
 
         <div id="modes" class="modes"></div>
@@ -981,8 +1230,15 @@ button {
     <section id="overallSection" style="display:none;">
 
         <div class="section-title">
-            <h2>🏆 Gesamtrangliste</h2>
-            <span>Alle 16 Modi</span>
+
+            <h2>
+                🏆 Gesamtrangliste
+            </h2>
+
+            <span>
+                Alle 16 Modi
+            </span>
+
         </div>
 
         <input
@@ -992,7 +1248,10 @@ button {
             oninput="renderOverallRanking()"
         >
 
-        <div id="overallRanking" class="leaderboard"></div>
+        <div
+            id="overallRanking"
+            class="leaderboard"
+        ></div>
 
         <div id="profileSection"></div>
 
@@ -1004,7 +1263,10 @@ button {
 
         <h2>🔐 Admin Panel</h2>
 
-        <div class="admin-login" id="adminLogin">
+        <div
+            class="admin-login"
+            id="adminLogin"
+        >
 
             <input
                 id="adminCode"
@@ -1012,13 +1274,20 @@ button {
                 placeholder="Admin-Code"
             >
 
-            <button class="action" onclick="unlockAdmin()">
+            <button
+                class="action"
+                onclick="unlockAdmin()"
+            >
                 Entsperren
             </button>
 
         </div>
 
-        <div id="adminPanel" class="admin-panel" style="display:none;">
+        <div
+            id="adminPanel"
+            class="admin-panel"
+            style="display:none;"
+        >
 
             <h3>Spieler hinzufügen</h3>
 
@@ -1034,7 +1303,10 @@ button {
                     placeholder="Notiz (optional)"
                 >
 
-                <button class="action green" onclick="addPlayer()">
+                <button
+                    class="action green"
+                    onclick="addPlayer()"
+                >
                     + Spieler hinzufügen
                 </button>
 
@@ -1055,22 +1327,34 @@ button {
                 <select id="adminModeSelect"></select>
 
                 <select id="adminTierSelect">
-                    <option value="">Unranked</option>
+
+                    <option value="">
+                        Unranked
+                    </option>
+
                     <option value="HT1">HT1</option>
                     <option value="LT1">LT1</option>
+
                     <option value="HT2">HT2</option>
                     <option value="LT2">LT2</option>
+
                     <option value="HT3">HT3</option>
                     <option value="LT3">LT3</option>
+
                     <option value="HT4">HT4</option>
                     <option value="LT4">LT4</option>
+
                     <option value="HT5">HT5</option>
                     <option value="LT5">LT5</option>
+
                 </select>
 
             </div>
 
-            <button class="action" onclick="saveAdminRank()">
+            <button
+                class="action"
+                onclick="saveAdminRank()"
+            >
                 Ranking speichern
             </button>
 
@@ -1090,38 +1374,54 @@ const ADMIN_CODE = "4711";
 const STORAGE_KEY = "minecraftTierlistV2";
 
 const tierPoints = {
+
     HT1: 60,
     LT1: 45,
+
     HT2: 30,
     LT2: 20,
+
     HT3: 10,
     LT3: 6,
+
     HT4: 4,
     LT4: 3,
+
     HT5: 2,
     LT5: 1
+
 };
 
 const overallRanks = [
+
     [0, "Unranked", "rank-unranked"],
+
     [10, "Bronze", "rank-bronze"],
     [25, "Silver", "rank-silver"],
     [40, "Gold", "rank-gold"],
+
     [60, "Diamond", "rank-diamond"],
     [85, "Elite", "rank-elite"],
+
     [120, "Champion", "rank-champion"],
     [180, "Master", "rank-master"],
+
     [240, "Grandmaster", "rank-grandmaster"],
     [320, "Titan", "rank-titan"],
+
     [400, "Mythic", "rank-mythic"],
     [500, "Immortal", "rank-immortal"],
+
     [600, "Ascendant", "rank-ascendant"],
     [720, "Overlord", "rank-overlord"],
+
     [840, "Legend", "rank-legend"],
     [960, "Apex", "rank-apex"]
+
 ];
 
 const players = [
+
     "Rypsie",
     "Blakksea",
     "Nicozilla2011",
@@ -1135,9 +1435,11 @@ const players = [
     "Xotic_Phantom98",
     "c0mlord69",
     "navy_23er"
+
 ];
 
 const pvpModes = [
+
     ["mace", "🔨", "Mace"],
     ["sword", "⚔️", "Sword"],
     ["cart", "🛒", "Cart"],
@@ -1148,18 +1450,23 @@ const pvpModes = [
     ["netheritepot", "🛡️", "Netherite Pot"],
     ["uhc", "❤️", "UHC"],
     ["axe", "🪓", "Axe"]
+
 ];
 
 const skillModes = [
+
     ["skywars", "☁️", "SkyWars"],
     ["bedwars", "🛏️", "BedWars"],
     ["disasters", "🌪️", "Disasters"],
     ["tntrun", "💣", "TNT Run"]
+
 ];
 
 const gameModes = [
+
     ["building", "🏗️", "Building"],
     ["redstone", "🔴", "Redstone"]
+
 ];
 
 let currentCategory = "pvp";
@@ -1177,20 +1484,27 @@ function createPlayerPoints() {
     const data = {};
 
     getAllModes().forEach(mode => {
+
         data[mode[0]] = {
             tier: ""
         };
+
     });
 
     return data;
+
 }
 
 function getAllModes() {
+
     return [
+
         ...pvpModes,
         ...skillModes,
         ...gameModes
+
     ];
+
 }
 
 function initializePlayers() {
@@ -1198,20 +1512,25 @@ function initializePlayers() {
     players.forEach(name => {
 
         if (!playerData[name]) {
+
             playerData[name] = createPlayerPoints();
+
         }
 
         getAllModes().forEach(mode => {
 
             if (!playerData[name][mode[0]]) {
+
                 playerData[name][mode[0]] = {
                     tier: ""
                 };
+
             }
 
         });
 
     });
+
 }
 
 function loadData() {
@@ -1230,22 +1549,28 @@ function loadData() {
 
     } catch (e) {
 
-        console.warn("Speicher konnte nicht geladen werden.");
+        console.warn(
+            "Speicher konnte nicht geladen werden."
+        );
 
     }
 
     initializePlayers();
 
     saveData();
+
 }
 
 function saveData() {
 
     localStorage.setItem(
+
         STORAGE_KEY,
+
         JSON.stringify({
             players: playerData
         })
+
     );
 
 }
@@ -1262,7 +1587,9 @@ function getSkin(name) {
 
 function getModeData(id) {
 
-    return getAllModes().find(mode => mode[0] === id);
+    return getAllModes().find(
+        mode => mode[0] === id
+    );
 
 }
 
@@ -1282,8 +1609,14 @@ function getModePoints(name, mode) {
 
 function getCategoryModes(category) {
 
-    if (category === "pvp") return pvpModes;
-    if (category === "skill") return skillModes;
+    if (category === "pvp") {
+        return pvpModes;
+    }
+
+    if (category === "skill") {
+        return skillModes;
+    }
+
     return gameModes;
 
 }
@@ -1292,7 +1625,12 @@ function getCategoryPoints(name, category) {
 
     return getCategoryModes(category)
         .reduce((sum, mode) => {
-            return sum + getModePoints(name, mode[0]);
+
+            return sum + getModePoints(
+                name,
+                mode[0]
+            );
+
         }, 0);
 
 }
@@ -1301,7 +1639,12 @@ function getTotalPoints(name) {
 
     return getAllModes()
         .reduce((sum, mode) => {
-            return sum + getModePoints(name, mode[0]);
+
+            return sum + getModePoints(
+                name,
+                mode[0]
+            );
+
         }, 0);
 
 }
@@ -1313,22 +1656,32 @@ function getOverallRank(points) {
     for (const rank of overallRanks) {
 
         if (points >= rank[0]) {
+
             result = rank;
+
         }
 
     }
 
     return {
+
         name: result[1],
         className: result[2]
+
     };
 
 }
 
 function getCategoryTitle(category) {
 
-    if (category === "pvp") return "⚔ PvP-Based";
-    if (category === "skill") return "🧠 Skill-Based";
+    if (category === "pvp") {
+        return "⚔ PvP-Based";
+    }
+
+    if (category === "skill") {
+        return "🧠 Skill-Based";
+    }
+
     return "🎮 Game-Based";
 
 }
@@ -1339,7 +1692,9 @@ function getCategoryTitle(category) {
 
 function updateStats() {
 
-    document.getElementById("statPlayers").textContent =
+    document.getElementById(
+        "statPlayers"
+    ).textContent =
         Object.keys(playerData).length;
 
     let ranked = 0;
@@ -1349,14 +1704,18 @@ function updateStats() {
         getAllModes().forEach(mode => {
 
             if (player[mode[0]]?.tier) {
+
                 ranked++;
+
             }
 
         });
 
     });
 
-    document.getElementById("statRanked").textContent = ranked;
+    document.getElementById(
+        "statRanked"
+    ).textContent = ranked;
 
 }
 
@@ -1367,22 +1726,40 @@ function updateStats() {
 function updateNav(category) {
 
     document.querySelectorAll(".nav-btn")
-        .forEach(btn => btn.classList.remove("active"));
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
 
     if (category === "pvp") {
-        document.querySelector(".nav-pvp").classList.add("active");
+
+        document
+            .querySelector(".nav-pvp")
+            .classList.add("active");
+
     }
 
     if (category === "skill") {
-        document.querySelector(".nav-skill").classList.add("active");
+
+        document
+            .querySelector(".nav-skill")
+            .classList.add("active");
+
     }
 
     if (category === "game") {
-        document.querySelector(".nav-game").classList.add("active");
+
+        document
+            .querySelector(".nav-game")
+            .classList.add("active");
+
     }
 
     if (category === "overall") {
-        document.querySelector(".nav-overall").classList.add("active");
+
+        document
+            .querySelector(".nav-overall")
+            .classList.add("active");
+
     }
 
 }
@@ -1390,14 +1767,23 @@ function updateNav(category) {
 function changeCategory(category) {
 
     currentCategory = category;
-    selectedMode = getCategoryModes(category)[0][0];
+
+    selectedMode =
+        getCategoryModes(category)[0][0];
 
     updateNav(category);
 
-    document.getElementById("normalContent").style.display = "block";
-    document.getElementById("overallSection").style.display = "none";
+    document.getElementById(
+        "normalContent"
+    ).style.display = "block";
 
-    document.getElementById("categoryHeading").textContent =
+    document.getElementById(
+        "overallSection"
+    ).style.display = "none";
+
+    document.getElementById(
+        "categoryHeading"
+    ).textContent =
         getCategoryTitle(category);
 
     renderModes();
@@ -1414,8 +1800,13 @@ function showOverall() {
 
     updateNav("overall");
 
-    document.getElementById("normalContent").style.display = "none";
-    document.getElementById("overallSection").style.display = "block";
+    document.getElementById(
+        "normalContent"
+    ).style.display = "none";
+
+    document.getElementById(
+        "overallSection"
+    ).style.display = "block";
 
     renderOverallRanking();
 
@@ -1432,26 +1823,45 @@ function showOverall() {
 
 function renderModes() {
 
-    const container = document.getElementById("modes");
+    const container =
+        document.getElementById("modes");
 
-    const modes = getCategoryModes(currentCategory);
+    const modes =
+        getCategoryModes(currentCategory);
 
-    container.innerHTML = modes.map(mode => {
+    container.innerHTML =
+        modes.map(mode => {
 
-        const [id, icon, name] = mode;
+            const [id, icon, name] = mode;
 
-        return `
-            <div
-                class="mode-card ${currentCategory}"
-                onclick="selectMode('${id}')"
-            >
-                <div class="mode-icon">${icon}</div>
-                <h3>${name}</h3>
-                <p>${selectedMode === id ? "Aktiv" : "Tierlist öffnen"}</p>
-            </div>
-        `;
+            return `
 
-    }).join("");
+                <div
+                    class="mode-card ${currentCategory}"
+                    onclick="selectMode('${id}')"
+                >
+
+                    <div class="mode-icon">
+                        ${icon}
+                    </div>
+
+                    <h3>
+                        ${name}
+                    </h3>
+
+                    <p>
+                        ${
+                            selectedMode === id
+                            ? "Aktiv"
+                            : "Tierlist öffnen"
+                        }
+                    </p>
+
+                </div>
+
+            `;
+
+        }).join("");
 
 }
 
@@ -1462,7 +1872,8 @@ function selectMode(mode) {
     renderModes();
     renderTierList();
 
-    document.getElementById("tierSection")
+    document
+        .getElementById("tierSection")
         .scrollIntoView({
             behavior: "smooth",
             block: "start"
@@ -1476,15 +1887,24 @@ function selectMode(mode) {
 
 function renderTierList() {
 
-    const container = document.getElementById("tierSection");
+    const container =
+        document.getElementById(
+            "tierSection"
+        );
 
-    const mode = getModeData(selectedMode);
+    const mode =
+        getModeData(selectedMode);
 
     if (!mode) return;
 
-    const [id, icon, name] = mode;
+    const [
+        id,
+        icon,
+        name
+    ] = mode;
 
     const tierNames = [
+
         "HT1",
         "LT1",
         "HT2",
@@ -1495,14 +1915,18 @@ function renderTierList() {
         "LT4",
         "HT5",
         "LT5"
+
     ];
 
     let html = `
+
         <div class="tier-container">
 
             <div class="tier-header">
 
-                <h2>${icon} ${name}</h2>
+                <h2>
+                    ${icon} ${name}
+                </h2>
 
                 <p>
                     Tierlist für ${name}.
@@ -1510,14 +1934,19 @@ function renderTierList() {
                 </p>
 
             </div>
+
     `;
 
     tierNames.forEach(tier => {
 
-        const tierPlayers = Object.keys(playerData)
-            .filter(name => getTier(name, id) === tier);
+        const tierPlayers =
+            Object.keys(playerData)
+            .filter(name =>
+                getTier(name, id) === tier
+            );
 
         html += `
+
             <div class="tier-row">
 
                 <div class="tier-label ${tier}">
@@ -1528,21 +1957,41 @@ function renderTierList() {
 
                     ${
                         tierPlayers.length
-                        ? tierPlayers.map(name => `
+
+                        ?
+
+                        tierPlayers.map(name => `
+
                             <div
                                 class="player-chip"
                                 onclick="showPlayerProfile('${escapeHtml(name)}')"
                             >
-                                <img src="${getSkin(name)}">
-                                <strong>${escapeHtml(name)}</strong>
+
+                                <img
+                                    src="${getSkin(name)}"
+                                >
+
+                                <strong>
+                                    ${escapeHtml(name)}
+                                </strong>
+
                             </div>
+
                         `).join("")
-                        : `<span style="color:#69778b;">Keine Spieler</span>`
+
+                        :
+
+                        `
+                            <span style="color:#69778b;">
+                                Keine Spieler
+                            </span>
+                        `
                     }
 
                 </div>
 
             </div>
+
         `;
 
     });
@@ -1554,90 +2003,268 @@ function renderTierList() {
 }
 
 /* =========================
+   LEADERBOARD MODE GROUP
+========================= */
+
+function renderLeaderModeGroup(
+    name,
+    category,
+    title,
+    modes
+) {
+
+    return `
+
+        <div class="
+            leader-mode-group
+            ${category}
+        ">
+
+            <div class="leader-mode-group-title">
+                ${title}
+            </div>
+
+            <div class="leader-mode-list">
+
+                ${
+                    modes.map(mode => {
+
+                        const [
+                            id,
+                            icon,
+                            modeName
+                        ] = mode;
+
+                        const tier =
+                            getTier(name, id);
+
+                        const points =
+                            getModePoints(name, id);
+
+                        const isUnranked =
+                            !tier;
+
+                        return `
+
+                            <div
+                                class="
+                                    leader-mode
+                                    ${category}
+                                    ${isUnranked
+                                        ? "unranked-mode"
+                                        : ""
+                                    }
+                                "
+                                title="${escapeHtml(modeName)} • ${tier || "Unranked"} • ${points} Punkte"
+                            >
+
+                                <span class="leader-mode-icon">
+                                    ${icon}
+                                </span>
+
+                                <span class="
+                                    leader-mode-tier
+                                    ${
+                                        isUnranked
+                                        ? "unranked-tier"
+                                        : ""
+                                    }
+                                ">
+                                    ${tier || "—"}
+                                </span>
+
+                            </div>
+
+                        `;
+
+                    }).join("")
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+/* =========================
    LEADERBOARD
 ========================= */
 
 function renderOverallRanking() {
 
     const container =
-        document.getElementById("overallRanking");
+        document.getElementById(
+            "overallRanking"
+        );
 
     const search =
-        document.getElementById("overallSearch").value
+        document.getElementById(
+            "overallSearch"
+        ).value
         .toLowerCase()
         .trim();
 
-    let ranking = Object.keys(playerData)
+    let ranking =
+        Object.keys(playerData)
         .map(name => {
 
-            const points = getTotalPoints(name);
-            const rank = getOverallRank(points);
+            const points =
+                getTotalPoints(name);
+
+            const rank =
+                getOverallRank(points);
 
             return {
+
                 name,
                 points,
                 rank
+
             };
 
         })
         .filter(player =>
-            player.name.toLowerCase().includes(search)
+            player.name
+                .toLowerCase()
+                .includes(search)
         )
-        .sort((a, b) => b.points - a.points);
+        .sort((a, b) =>
+            b.points - a.points
+        );
 
     if (!ranking.length) {
 
         container.innerHTML = `
+
             <div class="stat">
                 Keine Spieler gefunden.
             </div>
+
         `;
 
         return;
+
     }
 
-    container.innerHTML = ranking.map((player, index) => {
+    container.innerHTML =
+        ranking.map((player, index) => {
 
-        const place = index + 1;
+            const place =
+                index + 1;
 
-        return `
-            <div
-                class="leader-row"
-                onclick="showPlayerProfile('${escapeHtml(player.name)}')"
-            >
+            return `
 
-                <div class="
-                    place
-                    ${place === 1 ? "first" : ""}
-                    ${place === 2 ? "second" : ""}
-                    ${place === 3 ? "third" : ""}
-                ">
-                    #${place}
-                </div>
+                <div
+                    class="leader-row"
+                    onclick="showPlayerProfile('${escapeHtml(player.name)}')"
+                >
 
-                <div class="player-info">
+                    <!-- PLATZ -->
 
-                    <img src="${getSkin(player.name)}">
+                    <div class="
+                        place
+                        ${
+                            place === 1
+                            ? "first"
+                            : ""
+                        }
+                        ${
+                            place === 2
+                            ? "second"
+                            : ""
+                        }
+                        ${
+                            place === 3
+                            ? "third"
+                            : ""
+                        }
+                    ">
+                        #${place}
+                    </div>
 
-                    <div>
-                        <strong>${escapeHtml(player.name)}</strong>
-                        <small>${player.points} / 960 Punkte</small>
+                    <!-- SPIELER -->
+
+                    <div class="player-info">
+
+                        <div class="player-avatar-box">
+
+                            <img
+                                src="${getSkin(player.name)}"
+                                alt="${escapeHtml(player.name)}"
+                            >
+
+                            <div class="
+                                player-overall-rank
+                                ${player.rank.className}
+                            ">
+                                ${player.rank.name}
+                            </div>
+
+                        </div>
+
+                        <div class="player-text">
+
+                            <strong>
+                                ${escapeHtml(player.name)}
+                            </strong>
+
+                            <small>
+                                ${player.points} / 960 Punkte
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PUNKTE -->
+
+                    <div class="points">
+                        ${player.points} Punkte
+                    </div>
+
+                    <!-- GROSSER RANG -->
+
+                    <div class="
+                        rank-pill
+                        ${player.rank.className}
+                    ">
+                        ${player.rank.name}
+                    </div>
+
+                    <!-- MODI -->
+
+                    <div class="leader-modes">
+
+                        ${renderLeaderModeGroup(
+                            player.name,
+                            "pvp",
+                            "⚔ PvP",
+                            pvpModes
+                        )}
+
+                        ${renderLeaderModeGroup(
+                            player.name,
+                            "skill",
+                            "🧠 Skill",
+                            skillModes
+                        )}
+
+                        ${renderLeaderModeGroup(
+                            player.name,
+                            "game",
+                            "🎮 Game",
+                            gameModes
+                        )}
+
                     </div>
 
                 </div>
 
-                <div class="points">
-                    ${player.points} Punkte
-                </div>
+            `;
 
-                <div class="rank-pill ${player.rank.className}">
-                    ${player.rank.name}
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
+        }).join("");
 
 }
 
@@ -1645,62 +2272,108 @@ function renderOverallRanking() {
    PROFILE
 ========================= */
 
-function renderProfileCategory(name, category, icon, title) {
+function renderProfileCategory(
+    name,
+    category,
+    icon,
+    title
+) {
 
-    const modes = getCategoryModes(category);
+    const modes =
+        getCategoryModes(category);
 
     return `
+
         <div class="profile-category">
 
             <h3>
                 ${icon} ${title}
             </h3>
 
-            ${modes.map(mode => {
+            ${
+                modes.map(mode => {
 
-                const [id, modeIcon, modeName] = mode;
+                    const [
+                        id,
+                        modeIcon,
+                        modeName
+                    ] = mode;
 
-                const tier = getTier(name, id);
+                    const tier =
+                        getTier(name, id);
 
-                return `
-                    <div class="profile-mode">
+                    return `
 
-                        <div class="profile-mode-name">
-                            ${modeIcon}
-                            ${modeName}
+                        <div class="profile-mode">
+
+                            <div class="profile-mode-name">
+
+                                ${modeIcon}
+
+                                ${modeName}
+
+                            </div>
+
+                            ${
+                                tier
+
+                                ?
+
+                                `
+                                    <span
+                                        class="
+                                            profile-tier
+                                            ${tier}
+                                        "
+                                    >
+                                        ${tier}
+                                    </span>
+                                `
+
+                                :
+
+                                `
+                                    <span
+                                        class="
+                                            profile-tier
+                                            unranked
+                                        "
+                                    >
+                                        Unranked
+                                    </span>
+                                `
+                            }
+
                         </div>
 
-                        ${
-                            tier
-                            ? `<span class="profile-tier ${tier}">
-                                ${tier}
-                            </span>`
-                            : `<span class="profile-tier unranked">
-                                Unranked
-                            </span>`
-                        }
+                    `;
 
-                    </div>
-                `;
-
-            }).join("")}
+                }).join("")
+            }
 
         </div>
+
     `;
 
 }
 
 function showPlayerProfile(name) {
 
-    const player = playerData[name];
+    const player =
+        playerData[name];
 
     if (!player) return;
 
-    const points = getTotalPoints(name);
-    const rank = getOverallRank(points);
+    const points =
+        getTotalPoints(name);
+
+    const rank =
+        getOverallRank(points);
 
     const profile =
-        document.getElementById("profileSection");
+        document.getElementById(
+            "profileSection"
+        );
 
     profile.innerHTML = `
 
@@ -1713,6 +2386,7 @@ function showPlayerProfile(name) {
                 <img
                     class="profile-avatar"
                     src="${getSkin(name)}"
+                    alt="${escapeHtml(name)}"
                 >
 
                 <div class="profile-name">
@@ -1758,6 +2432,7 @@ function showPlayerProfile(name) {
             </div>
 
         </div>
+
     `;
 
     profile.scrollIntoView({
@@ -1774,19 +2449,27 @@ function showPlayerProfile(name) {
 function unlockAdmin() {
 
     const code =
-        document.getElementById("adminCode").value;
+        document.getElementById(
+            "adminCode"
+        ).value;
 
     if (code !== ADMIN_CODE) {
 
         alert("Falscher Admin-Code.");
+
         return;
 
     }
 
     adminUnlocked = true;
 
-    document.getElementById("adminLogin").style.display = "none";
-    document.getElementById("adminPanel").style.display = "block";
+    document.getElementById(
+        "adminLogin"
+    ).style.display = "none";
+
+    document.getElementById(
+        "adminPanel"
+    ).style.display = "block";
 
     renderAdmin();
 
@@ -1797,23 +2480,41 @@ function renderAdmin() {
     if (!adminUnlocked) return;
 
     const playersContainer =
-        document.getElementById("adminPlayers");
+        document.getElementById(
+            "adminPlayers"
+        );
 
     playersContainer.innerHTML =
         Object.keys(playerData)
-        .sort((a,b) => a.localeCompare(b))
+        .sort((a,b) =>
+            a.localeCompare(b)
+        )
         .map(name => {
 
             return `
+
                 <div class="admin-player">
 
-                    <img src="${getSkin(name)}">
+                    <img
+                        src="${getSkin(name)}"
+                    >
 
                     <div>
-                        <strong>${escapeHtml(name)}</strong>
-                        <small style="display:block;color:#7f8da1;">
-                            ${getTotalPoints(name)} Punkte
+
+                        <strong>
+                            ${escapeHtml(name)}
+                        </strong>
+
+                        <small
+                            style="
+                                display:block;
+                                color:#7f8da1;
+                            "
+                        >
+                            ${getTotalPoints(name)}
+                            Punkte
                         </small>
+
                     </div>
 
                     <div class="admin-player-actions">
@@ -1828,81 +2529,113 @@ function renderAdmin() {
                     </div>
 
                 </div>
+
             `;
 
         }).join("");
 
     const playerSelect =
-        document.getElementById("adminPlayerSelect");
+        document.getElementById(
+            "adminPlayerSelect"
+        );
 
     playerSelect.innerHTML =
         Object.keys(playerData)
         .sort()
         .map(name =>
+
             `<option value="${escapeHtml(name)}">
                 ${escapeHtml(name)}
             </option>`
+
         )
         .join("");
 
     const modeSelect =
-        document.getElementById("adminModeSelect");
+        document.getElementById(
+            "adminModeSelect"
+        );
 
     modeSelect.innerHTML = `
 
         <optgroup label="⚔ PvP">
+
             ${pvpModes.map(mode =>
+
                 `<option value="${mode[0]}">
                     ${mode[1]} ${mode[2]}
                 </option>`
+
             ).join("")}
+
         </optgroup>
 
         <optgroup label="🧠 Skill">
+
             ${skillModes.map(mode =>
+
                 `<option value="${mode[0]}">
                     ${mode[1]} ${mode[2]}
                 </option>`
+
             ).join("")}
+
         </optgroup>
 
         <optgroup label="🎮 Game">
+
             ${gameModes.map(mode =>
+
                 `<option value="${mode[0]}">
                     ${mode[1]} ${mode[2]}
                 </option>`
+
             ).join("")}
+
         </optgroup>
 
     `;
 
 }
 
+/* =========================
+   ADD PLAYER
+========================= */
+
 function addPlayer() {
 
     if (!adminUnlocked) return;
 
     const input =
-        document.getElementById("newPlayerName");
+        document.getElementById(
+            "newPlayerName"
+        );
 
     const name =
         input.value.trim();
 
     if (!name) {
 
-        alert("Bitte einen Spielernamen eingeben.");
+        alert(
+            "Bitte einen Spielernamen eingeben."
+        );
+
         return;
 
     }
 
     if (playerData[name]) {
 
-        alert("Dieser Spieler existiert bereits.");
+        alert(
+            "Dieser Spieler existiert bereits."
+        );
+
         return;
 
     }
 
-    playerData[name] = createPlayerPoints();
+    playerData[name] =
+        createPlayerPoints();
 
     saveData();
 
@@ -1913,9 +2646,15 @@ function addPlayer() {
     renderModes();
     renderTierList();
 
-    alert(`${name} wurde hinzugefügt.`);
+    alert(
+        `${name} wurde hinzugefügt.`
+    );
 
 }
+
+/* =========================
+   DELETE PLAYER
+========================= */
 
 function deletePlayer(name) {
 
@@ -1942,23 +2681,36 @@ function deletePlayer(name) {
 
 }
 
+/* =========================
+   SAVE RANK
+========================= */
+
 function saveAdminRank() {
 
     if (!adminUnlocked) return;
 
     const name =
-        document.getElementById("adminPlayerSelect").value;
+        document.getElementById(
+            "adminPlayerSelect"
+        ).value;
 
     const mode =
-        document.getElementById("adminModeSelect").value;
+        document.getElementById(
+            "adminModeSelect"
+        ).value;
 
     const tier =
-        document.getElementById("adminTierSelect").value;
+        document.getElementById(
+            "adminTierSelect"
+        ).value;
 
     if (!name || !mode) return;
 
     if (!playerData[name]) {
-        playerData[name] = createPlayerPoints();
+
+        playerData[name] =
+            createPlayerPoints();
+
     }
 
     playerData[name][mode] = {
@@ -1984,11 +2736,31 @@ function saveAdminRank() {
 function escapeHtml(value) {
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
